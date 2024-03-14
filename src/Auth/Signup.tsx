@@ -51,7 +51,7 @@ function Signup() {
         return  setDoc(userDocumentReference, {
           username: username,
           bio: '',
-          day: 1,
+          day: 14,
           company: companyCode //company code
         });
       });
