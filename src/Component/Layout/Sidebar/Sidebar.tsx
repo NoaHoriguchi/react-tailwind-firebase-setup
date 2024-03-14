@@ -5,11 +5,12 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   const SIDEBAR_TABS = [
-    { name: "Netflix", path: "/netflix" },
-    { name: "Instagram", path: "/instagram" },
-    { name: "Amazon", path: "/amazon" },
-    { name: "Book my show", path: "/bookmyshow" },
-    { name: "Whatsapp", path: "/whatsapp" },
+    { name: "Intro", path: "/intro" },
+    { name: "Upload", path: "/upload" },
+    { name: "Outro", path: "/outro" },
+    { name: "Input", path: "/input" },
+    { name: "Trailer", path: "/trailer" },
+    { name: "Rating", path: "/rating" }
   ];
 
   const handleTabClick = (path: string) => {

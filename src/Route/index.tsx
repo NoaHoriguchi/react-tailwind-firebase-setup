@@ -6,12 +6,13 @@ import Signup from "../Auth/Signup";
 import ForgotPassword from "../Auth/ForgotPassword";
 import MobileNumberLogin from "../Auth/MobileNumberLogin";
 import DefaultLayout from "../Layout/DefaultLayout";
-import Dashboard from "../Component/Pages/Dashboard/Dashboard";
+import Intro from "../Component/Pages/Intro/Intro";
 import NotFound from "../Component/Pages/NotFound/NotFound";
-import Instagram from "../Component/Pages/Instagram/Instagram";
-import Amazon from "../Component/Pages/Amazon/Amazon";
-import BookMyShow from "../Component/Pages/BookMyShow/BookMyShow";
-import Whatsapp from "../Component/Pages/Whatsapp/Whatsapp";
+import Upload from "../Component/Pages/Upload/Upload";
+import Outro from "../Component/Pages/Outro/Outro";
+import Input from "../Component/Pages/Input/Input";
+import Trailer from "../Component/Pages/Trailer/Trailer";
+import Rating from "../Component/Pages/Rating/Rating";
 
 const routes = createBrowserRouter([
   {
@@ -44,24 +45,28 @@ const routes = createBrowserRouter([
     element: <DefaultLayout />,
     children: [
       {
-        path: "dashboard",
-        element: <Dashboard />,
+        path: "Intro",
+        element: <Intro />,
       },
       {
-        path: "instagram",
-        element: <Instagram />,
+        path: "Upload",
+        element: <Upload />,
       },
       {
-        path: "amazon",
-        element: <Amazon />,
+        path: "Outro",
+        element: <Outro />,
       },
       {
-        path: "bookmyshow",
-        element: <BookMyShow />,
+        path: "Rating",
+        element: <Rating />,
       },
       {
-        path: "whatsapp",
-        element: <Whatsapp />,
+        path: "Input",
+        element: <Input />,
+      },
+      {
+        path: "Trailer",
+        element: <Trailer />,
       },
     ],
   },
