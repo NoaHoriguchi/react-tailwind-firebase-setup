@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "111147197168",
+    "project_id": "ai-training-b71e1",
+    "storage_bucket": "ai-training-b71e1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:111147197168:android:4b5284e40d998342b01835",
+        "android_client_info": {
+          "package_name": "com.ClassroomAdventure.OfficeDesk"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA__snoS6ECfIkClYkeEUGJdIBeWr0N3gw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
