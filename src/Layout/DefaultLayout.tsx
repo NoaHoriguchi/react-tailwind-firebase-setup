@@ -10,9 +10,10 @@ function DefaultLayout() {
     <>
       {token ? (
         <>
-          <Header />
-          <Sidebar />
-          <div className="p-4 sm:ml-64" style={{ marginTop: "120px" }}>
+          {/* <Header /> */}
+          {/* <Sidebar /> */}
+          {/* <div className="p-4 sm:ml-64" style={{ marginTop: "120px" }}> */}
+          <div className="container m-auto my-8">
             <Outlet />
           </div>
         </>

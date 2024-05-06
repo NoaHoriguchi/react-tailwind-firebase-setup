@@ -67,7 +67,7 @@ const Rating = () => {
     const [rated, setRated] = React.useState(4);
 
     const finishDay = () => {
-        let folderRef = ref(storage, userData.day + "/" + auth.currentUser?.uid);
+        let folderRef = ref(storage, userData.day + "/" + auth.currentUser?.uid + "/texts");
         metadata = {
             customMetadata: {
                 rating: rated.toString()

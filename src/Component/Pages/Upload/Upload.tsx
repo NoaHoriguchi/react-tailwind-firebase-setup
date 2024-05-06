@@ -1,10 +1,11 @@
-import React, { useMemo, useEffect, useState } from "react";
+import React, { useMemo, useEffect, useState, useId } from "react";
 import {useDropzone} from 'react-dropzone';
 import { auth, db, storage } from "../../../Helpers/Firebase";
 import { collection, doc, getDoc, query, getDocs, DocumentData } from "firebase/firestore";
-import { UploadMetadata, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage"
+import { UploadMetadata, ref, uploadBytes, getDownloadURL, deleteObject, uploadString } from "firebase/storage"
 import { useNavigate } from "react-router-dom";
 import YouTube, { YouTubeProps } from "react-youtube";
+import { Textarea } from "@material-tailwind/react";
 
 var userData: DocumentData;
 var missions: DocumentData[];
@@ -49,7 +50,9 @@ const Upload = () => {
   
   useEffect(() => {
     let currentUserId = auth.currentUser?.uid;
-
+    if (!currentUserId) { 
+      navigate("/login");
+    }
     console.log("uid: " + currentUserId);
 
     if (currentUserId) {
@@ -75,14 +78,15 @@ const Upload = () => {
         if (missions[i].day == userData.day) {
           todayMission = missions[i];
           console.log("mission: " + todayMission.title);
+          console.log("videoLink: " + todayMission.videoLink);
         } 
       } 
       tasks = 
         <div className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl mb-4">
-          title: {todayMission.title} <br></br>
-          day: {todayMission.day} <br></br>
+          今日のお題：{todayMission.title} <br></br>
+          {/* day: {todayMission.day} <br></br>
           fromUser: {todayMission.fromUser} <br></br>
-          message: {todayMission.message} <br></br>
+          message: {todayMission.message} <br></br> */}
         </div>
       setTask(tasks);
 
@@ -142,23 +146,50 @@ const Upload = () => {
   const uploadFile = () => {
     if (!acceptedFiles.length) {
       console.log("no files selected");
-      return;
     } else {
       console.log("uploadURL: " + userData.day + "/" + auth.currentUser?.uid);
       for (let i = 0; i < acceptedFiles.length; i += 1) {
-        let fileRef = ref(storage, userData.day + "/" + auth.currentUser?.uid + "/" + i);
+        let fileRef = ref(storage, userData.day + "/" + auth.currentUser?.uid + "/files/" + i);
         getDownloadURL(fileRef).then((url) => {
           deleteObject(fileRef);
           console.log("deleted file at " + i);
           uploadBytes(fileRef, acceptedFiles[i], metadata).then((snapshot) => {
-            console.log('Uploaded a file to: ' + storage, userData.day + "/" + auth.currentUser?.uid + "/" + i);
+            console.log('Uploaded a file to: ' + storage, userData.day + "/" + auth.currentUser?.uid + "/files/" + i);
           });
+          // navigate("/input");
         }, err => uploadBytes(fileRef, acceptedFiles[i], metadata).then((snapshot) => {
-          console.log('Uploaded a file to: ' + storage, userData.day + "/" + auth.currentUser?.uid + "/" + i);
+          console.log('Uploaded a file to: ' + storage, userData.day + "/" + auth.currentUser?.uid + "/files/" + i);
         }));
       }
     }
-    navigate("/outro");
+    if (!postContent) {
+      console.log("no post content");
+      return;
+      // let fileRef = ref(storage, userData.day + "/" + auth.currentUser?.uid + "/texts/" + "content");
+      // uploadString(fileRef, postContent).then((snapshot) => {
+      //   console.log("uploaded string: " + postContent);
+      // })
+    } else {
+      console.log("uploadURL: " + userData.day + "/" + auth.currentUser?.uid);
+      let fileRef = ref(storage, userData.day + "/" + auth.currentUser?.uid + "/texts/" + "content");
+      uploadString(fileRef, postContent).then((snapshot) => {
+        console.log("uploaded string: " + postContent);
+      })
+    }
+    if (!urlContent) {
+      console.log("no url content");
+      let fileRef = ref(storage, userData.day + "/" + auth.currentUser?.uid + "/urls/" + "content");
+      uploadString(fileRef, urlContent).then((snapshot) => {
+        console.log("uploaded string: " + urlContent);
+      })
+    } else {
+      console.log("uploadURL: " + userData.day + "/" + auth.currentUser?.uid);
+      let fileRef = ref(storage, userData.day + "/" + auth.currentUser?.uid + "/urls/" + "content");
+      uploadString(fileRef, urlContent).then((snapshot) => {
+        console.log("uploaded string: " + urlContent);
+      })
+    }
+    navigate("/input");
   };
   const onPlayerReady: YouTubeProps['onReady'] = (event) => {
     // access to player in all event handlers via event.target
@@ -173,16 +204,36 @@ const Upload = () => {
       autoplay: 1,
     },
   };
-
+  const postTextAreaId = useId();
+  const [postContent, setPostContent] = useState('');
+  const [urlContent, setUrlContent] = useState('');
   return (
-    <div className="container">
+    <div className="container align-top flex-col">
       <div>
         {task}
       </div>
+      <div className="container m-auto flex-col">
+      <label htmlFor={postTextAreaId}>
+        ChatGPTの生成物をコピペしてください！
+      </label>
+      <textarea
+        id={postTextAreaId}
+        name="postContent"
+        rows={4}
+        cols={40}
+        value={postContent} // ...force the input's value to match the state variable...
+        onChange={e => setPostContent(e.target.value)} 
+      />
+    </div>
+    <label className="container m-auto">
+      ChatGPTの共有リンク：
+      <textarea name="postContent" rows={1} cols={40} value={urlContent} // ...force the input's value to match the state variable...
+        onChange={e => setUrlContent(e.target.value)}  />
+    </label>
       {/* <YouTube videoId="VqGO-mQY0q4" opts={opts} onReady={onPlayerReady} className="m-6"/> */}
-      <div>
+      {/* <div>
         {spanishMail}
-      </div>
+      </div> */}
       <div {...getRootProps({style})}>
         <input {...getInputProps()} />
         <p>Drag 'n' drop some files here, or click to select files</p>

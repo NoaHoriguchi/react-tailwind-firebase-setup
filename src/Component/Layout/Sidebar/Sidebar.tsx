@@ -5,11 +5,11 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   const SIDEBAR_TABS = [
-    { name: "Intro", path: "/intro" },
+    // { name: "Intro", path: "/intro" },
     { name: "Upload", path: "/upload" },
-    { name: "Outro", path: "/outro" },
+    // { name: "Outro", path: "/outro" },
     { name: "Input", path: "/input" },
-    { name: "Trailer", path: "/trailer" },
+    // { name: "Trailer", path: "/trailer" },
     { name: "Rating", path: "/rating" }
   ];
 

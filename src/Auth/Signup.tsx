@@ -18,6 +18,7 @@ function Signup() {
   const [userEmail, setUserEmail] = useState("");
   const [username, setUsername] = useState("");
   const [companyCode, setCode] = useState("");
+  const [fullName, setName] = useState("");
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -47,12 +48,19 @@ function Signup() {
     try {
       await createUserWithEmailAndPassword(auth, email, password).then(cred => {
         const userCollectionReference = collection(db, 'users');
+        const now  = new Date().getTime();
+        console.log(now)
         const userDocumentReference = doc(userCollectionReference, cred.user.uid);
         return  setDoc(userDocumentReference, {
           username: username,
           bio: '',
-          day: 14,
-          company: companyCode //company code
+          day: 1,
+          company: companyCode, //company code
+          fullName: fullName,
+          lastLogin: now,
+          streak: 0,
+          rank: 0,
+          email: email,
         });
       });
       navigate("/login");
@@ -116,17 +124,17 @@ function Signup() {
               <form className="space-y-4 md:space-y-6" action="#">
                 <div>
                   <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                    Your Username
+                    Full Name
                   </label>
                   <input
                     type="text"
-                    name="username"
-                    id="username"
-                    value={username}
+                    name="fullName"
+                    id="fullName"
+                    value={fullName}
                     required
-                    onChange={(e) => setUsername(e.target.value)}
+                    onChange={(e) => setName(e.target.value)}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Username"
+                    placeholder="John Smith"
                   />
                 </div>
                 <div>
