@@ -15,10 +15,10 @@ import Outro from "../Component/Pages/Outro/Outro";
 import Input from "../Component/Pages/Input/Input";
 import Trailer from "../Component/Pages/Trailer/Trailer";
 import Rating from "../Component/Pages/Rating/Rating";
-import DashboardLayout from "../Layout/DashboardLayout";
-import Home from "../Pages/home/Home"
-import Users from "../Pages/users/Users"
-import User from "../Pages/user/User"
+// import DashboardLayout from "../Layout/DashboardLayout";
+// import Home from "../Pages/home/Home"
+// import Users from "../Pages/users/Users"
+// import User from "../Pages/user/User"
 import "../Pages/styles/global.scss"
 
 const routes = createBrowserRouter([
@@ -85,27 +85,27 @@ const routes = createBrowserRouter([
       },
     ],
   },
-  {
-    path: "/",
-    element: <DashboardLayout />,
-    children: [
-      {
-        path: "home",
-          element: <Home />,
-      },
-      {
-        path: "users",
-        element: <Users />,
-      },
-      {
-        path: "users/:id",
-        element: <User />,
-      },
-    ],
-  },
-  {
-    path: "*",
-    element: <NotFound />,
-  },
+  // {
+  //   path: "/",
+  //   element: <DashboardLayout />,
+  //   children: [
+  //     {
+  //       path: "home",
+  //         element: <Home />,
+  //     },
+  //     {
+  //       path: "users",
+  //       element: <Users />,
+  //     },
+  //     {
+  //       path: "users/:id",
+  //       element: <User />,
+  //     },
+  //   ],
+  // },
+  // {
+  //   path: "*",
+  //   element: <NotFound />,
+  // },
 ]);
 export default routes;
