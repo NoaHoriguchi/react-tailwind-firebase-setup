@@ -19,7 +19,7 @@ import Rating from "../Component/Pages/Rating/Rating";
 // import Home from "../Pages/home/Home"
 // import Users from "../Pages/users/Users"
 // import User from "../Pages/user/User"
-import "../Pages/styles/global.scss"
+// import "../Pages/styles/global.scss"
 
 const routes = createBrowserRouter([
   {
