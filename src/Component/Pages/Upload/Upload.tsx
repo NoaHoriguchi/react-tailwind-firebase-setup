@@ -208,16 +208,17 @@ const Upload = () => {
   const [postContent, setPostContent] = useState('');
   const [urlContent, setUrlContent] = useState('');
   return (
-    <div className="container align-top flex-col">
+    <div className="container align-top flex-col gap-12">
       <div>
         {task}
       </div>
-      <div className="container m-auto flex-col">
+      <div className="container m-auto flex-col m-8">
       <label htmlFor={postTextAreaId}>
         ChatGPTの生成物をコピペしてください！
       </label>
       <textarea
         id={postTextAreaId}
+        className="bg-gray-200 border-b-2 border-blue-700"
         name="postContent"
         rows={4}
         cols={40}
@@ -225,11 +226,13 @@ const Upload = () => {
         onChange={e => setPostContent(e.target.value)} 
       />
     </div>
-    <label className="container m-auto">
+    <div className="container align-top flex-col gap-12 m-8">
+    <label className="container">
       ChatGPTの共有リンク：
-      <textarea name="postContent" rows={1} cols={40} value={urlContent} // ...force the input's value to match the state variable...
+      <textarea name="postContent" className="bg-gray-200 border-b-2 border-blue-700" rows={2} cols={100} value={urlContent} // ...force the input's value to match the state variable...
         onChange={e => setUrlContent(e.target.value)}  />
     </label>
+    </div >
       {/* <YouTube videoId="VqGO-mQY0q4" opts={opts} onReady={onPlayerReady} className="m-6"/> */}
       {/* <div>
         {spanishMail}
