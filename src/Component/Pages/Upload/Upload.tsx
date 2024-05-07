@@ -83,7 +83,7 @@ const Upload = () => {
       } 
       tasks = 
         <div className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl mb-4">
-          今日のお題：{todayMission.title} <br></br>
+          DAY {todayMission.day}：{todayMission.title} <br></br>
           {/* day: {todayMission.day} <br></br>
           fromUser: {todayMission.fromUser} <br></br>
           message: {todayMission.message} <br></br> */}
