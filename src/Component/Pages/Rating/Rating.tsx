@@ -79,7 +79,7 @@ const Rating = () => {
             })
         });
         console.log("update rating complete")
-        updateDoc(doc(db, "users", currentUserId), "day", userData.day += 1).then(()=>{ //change later to 0
+        updateDoc(doc(db, "users", currentUserId), "day", userData.day == 1).then(()=>{ //change later to 0
             navigate("/upload");
         });
     }
